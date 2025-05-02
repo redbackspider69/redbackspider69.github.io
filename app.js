@@ -1,6 +1,5 @@
 // app.js
 
-// Replace these config values with your Firebase project settings
 const firebaseConfig = {
     apiKey: "AIzaSyDcXSHxWWCCwIypr62CG4OM69O4J9NLBNI",
     authDomain: "sbhs-year-8-chess-tournament.firebaseapp.com",
@@ -9,7 +8,6 @@ const firebaseConfig = {
     storageBucket: "sbhs-year-8-chess-tournament.firebasestorage.app",
     messagingSenderId: "632119283742",
     appId: "1:632119283742:web:ea2e5b59f5d80df1cede0f",
-    measurementId: "G-WWMX2NY183"
   };
   
   firebase.initializeApp(firebaseConfig);

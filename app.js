@@ -2,13 +2,14 @@
 
 // Replace these config values with your Firebase project settings
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    databaseURL: "https://YOUR_PROJECT.firebaseio.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyDcXSHxWWCCwIypr62CG4OM69O4J9NLBNI",
+    authDomain: "sbhs-year-8-chess-tournament.firebaseapp.com",
+    databaseURL: "https://sbhs-year-8-chess-tournament-default-rtdb.firebaseio.com",
+    projectId: "sbhs-year-8-chess-tournament",
+    storageBucket: "sbhs-year-8-chess-tournament.firebasestorage.app",
+    messagingSenderId: "632119283742",
+    appId: "1:632119283742:web:ea2e5b59f5d80df1cede0f",
+    measurementId: "G-WWMX2NY183"
   };
   
   firebase.initializeApp(firebaseConfig);

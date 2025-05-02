@@ -23,7 +23,7 @@ const firebaseConfig = {
       .then((result) => {
         const user = result.user;
         const email = user.email;
-  
+        log(email);
         if (!email.endsWith("@student.sbhs.nsw.edu.au")) {
           alert("Please use your school Google account.");
           auth.signOut();

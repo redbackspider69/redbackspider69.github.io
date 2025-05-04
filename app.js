@@ -62,4 +62,18 @@ auth.onAuthStateChanged(async (user) => {
       }
     }
 });
+
+function loadLeaderboard() {
+    db.ref("users").once("value").then(snapshot => {
+      const users = snapshot.val();
+      const leaderboard = Object.values(users).sort((a, b) => (b.score || 0) - (a.score || 0));
   
+      const tbody = document.querySelector("#leaderboard tbody");
+      tbody.innerHTML = "";
+      leaderboard.forEach(user => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${user.name}</td><td>${user.score || 0}</td>`;
+        tbody.appendChild(row);
+      });
+    });
+  }  

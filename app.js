@@ -77,13 +77,13 @@ function loadLeaderboard() {
   }  
 
 function checkResults() {
-  fetch("https://your-glitch-app.glitch.me/check-results", { method: "POST" })
+  fetch("https://year8-chess-tournament-backend.glitch.me/check-results", { method: "POST" })
     .then(res => res.json())
     .then(data => alert(`Updated games: ${data.updatedGames.length}`));
 }
 
 function startRound() {
-  fetch("https://your-glitch-app.glitch.me/start-round", { method: "POST" })
+  fetch("https://year8-chess-tournament-backend.glitch.me/start-round", { method: "POST" })
     .then(res => res.json())
     .then(data => alert(`Started new round with ${data.pairings} games.`));
 }

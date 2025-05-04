@@ -77,3 +77,25 @@ function loadLeaderboard() {
       });
     });
   }  
+
+function checkResults() {
+  fetch("https://your-glitch-app.glitch.me/check-results", { method: "POST" })
+    .then(res => res.json())
+    .then(data => alert(`Updated games: ${data.updatedGames.length}`));
+}
+
+function startRound() {
+  fetch("https://your-glitch-app.glitch.me/start-round", { method: "POST" })
+    .then(res => res.json())
+    .then(data => alert(`Started new round with ${data.pairings} games.`));
+}
+
+auth.onAuthStateChanged(async (user) => {
+    if (user) {
+      const email = user.email;
+      if (email === "448705021@student.sbhs.nsw.edu.au") {
+        document.getElementById("admin-panel").style.display = "block";
+      }
+      loadLeaderboard();
+    }
+  });  

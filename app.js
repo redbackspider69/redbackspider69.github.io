@@ -49,19 +49,17 @@ auth.signInWithPopup(provider)
 
 auth.onAuthStateChanged(async (user) => {
     if (user) {
-      const uid = user.uid;
-      const snapshot = await db.ref("users/" + uid).once("value");
-      const userData = snapshot.val();
+      const email = user.email;
+      userInfo.innerText = `Signed in as ${user.displayName}`;
+      signInBtn.style.display = "none";
   
-      if (userData && userData.currentGameUrl) {
-        const link = document.createElement('a');
-        link.href = userData.currentGameUrl;
-        link.textContent = `Join your match as ${userData.lichessColor}`;
-        link.target = "_blank";
-        document.body.appendChild(link);
+      if (email === "448705021@student.sbhs.nsw.edu.au") {
+        document.getElementById("admin-panel").style.display = "block";
       }
+  
+      loadLeaderboard();
     }
-});
+  });  
 
 function loadLeaderboard() {
     db.ref("users").once("value").then(snapshot => {
@@ -89,13 +87,3 @@ function startRound() {
     .then(res => res.json())
     .then(data => alert(`Started new round with ${data.pairings} games.`));
 }
-
-auth.onAuthStateChanged(async (user) => {
-    if (user) {
-      const email = user.email;
-      if (email === "448705021@student.sbhs.nsw.edu.au") {
-        document.getElementById("admin-panel").style.display = "block";
-      }
-      loadLeaderboard();
-    }
-  });  

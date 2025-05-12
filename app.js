@@ -48,18 +48,29 @@ auth.signInWithPopup(provider)
 });
 
 auth.onAuthStateChanged(async (user) => {
-    if (user) {
-      const email = user.email;
-      userInfo.innerText = `Signed in as ${user.displayName}`;
-      signInBtn.style.display = "none";
-  
-      if (email === "448705021@student.sbhs.nsw.edu.au") {
-        document.getElementById("admin-panel").style.display = "block";
-      }
-  
-      loadLeaderboard();
+  if (user) {
+    const uid = user.uid;
+    const email = user.email;
+    userInfo.innerText = `Signed in as ${user.displayName}`;
+    signInBtn.style.display = "none";
+
+    if (email === "448705021@student.sbhs.nsw.edu.au") {
+      document.getElementById("admin-panel").style.display = "block";
     }
-  });  
+
+    loadLeaderboard();
+
+    // Show current game
+    const snap = await db.ref("users/" + uid).once("value");
+    const userData = snap.val();
+    if (userData && userData.currentGameUrl) {
+      const gameLink = document.getElementById("game-link");
+      gameLink.href = userData.currentGameUrl;
+      gameLink.innerText = "Join Your Game";
+      document.getElementById("game-panel").style.display = "block";
+    }
+  }
+});  
 
 function loadLeaderboard() {
     db.ref("users").once("value").then(snapshot => {

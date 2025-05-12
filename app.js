@@ -98,3 +98,25 @@ function startRound() {
     .then(res => res.json())
     .then(data => alert(`Started new round with ${data.pairings} games.`));
 }
+
+function reportTroll() {
+  const user = firebase.auth().currentUser;
+  if (!user) return alert("Please sign in first.");
+
+  fetch("https://year8-chess-tournament-backend.glitch.me/report-troll", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ reporterId: user.uid })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert("New game created due to trolling.");
+      const gameLink = document.getElementById("game-link");
+      gameLink.href = data.newGameUrl;
+      gameLink.innerText = "Join New Game";
+    } else {
+      alert("Failed to create new game.");
+    }
+  });
+}

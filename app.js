@@ -168,4 +168,4 @@ function minMaxReports() {
     reportList.style.display = "block";
     button.innerHTML = 'Minimise Reports';
   }
-}
+} 

@@ -102,22 +102,22 @@ function startRound() {
 }
 
 function reportTroll() {
-  fetch("https://your-backend.glitch.me/report-troll", {
+  if (!currentUser) {
+    alert("Please sign in first.");
+    return;
+  }
+
+  fetch("https://year8-chess-tournament-backend.glitch.me/report-troll", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ reporterId: currentUser.uid })
   })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      alert("Opponent reported. You have a new game link.");
-    } else {
-      alert("Something went wrong reporting the opponent.");
-    }
-  })
-  .catch(err => {
-    console.error("Error reporting opponent:", err);
-  });  
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        alert("New game created. Use your new link.");
+      } else {
+        alert("Failed to create a new game.");
+      }
+    });
 }

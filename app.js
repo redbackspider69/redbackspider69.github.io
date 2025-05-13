@@ -163,9 +163,9 @@ function minMaxReports() {
   const button = document.getElementById("min-max");
   if (reportList.style.display == "block") {
     reportList.style.display = "none";
-    button.setAttribute('Maximise Reports');
+    button.innerHTML = 'Maximise Reports';
   } else {
     reportList.style.display = "block";
-    button.setAttribute('Minimise Reports');
+    button.innerHTML = 'Minimise Reports';
   }
 }

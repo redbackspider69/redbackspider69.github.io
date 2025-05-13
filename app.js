@@ -100,23 +100,22 @@ function startRound() {
 }
 
 function reportTroll() {
-  const user = firebase.auth().currentUser;
-  if (!user) return alert("Please sign in first.");
-
-  fetch("https://year8-chess-tournament-backend.glitch.me/report-troll", {
+  fetch("https://your-backend.glitch.me/report-troll", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ reporterId: user.uid })
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ reporterId: user.uid })  // must be the current user's UID
   })
   .then(res => res.json())
   .then(data => {
     if (data.success) {
-      alert("New game created due to trolling.");
-      const gameLink = document.getElementById("game-link");
-      gameLink.href = data.newGameUrl;
-      gameLink.innerText = "Join New Game";
+      alert("Opponent reported. You have a new game link.");
     } else {
-      alert("Failed to create new game.");
+      alert("Something went wrong reporting the opponent.");
     }
-  });
+  })
+  .catch(err => {
+    console.error("Error reporting opponent:", err);
+  });  
 }

@@ -65,6 +65,7 @@ if (user) {
 
   if (email === "448705021@student.sbhs.nsw.edu.au") {
     document.getElementById("admin-panel").style.display = "block";
+    loadReports();
   }
 
   loadLeaderboard();
@@ -131,5 +132,27 @@ fetch("https://year8-chess-tournament-backend.glitch.me/report-troll", {
   .catch((err) => {
     alert("Failed to reach server.");
     console.error("Fetch error:", err);
+  });
+}
+
+function loadReports() {
+  db.ref("reports").once("value").then(snapshot => {
+    const reports = snapshot.val();
+    if (!reports) return;
+
+    const reportList = document.getElementById("report-list");
+    reportList.innerHTML = "";
+
+    Object.values(reports).forEach(report => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        Reporter: ${report.reporterId}<br>
+        Opponent: ${report.opponentId}<br>
+        <a href="${report.oldGameUrl}" target="_blank">Old Game</a> |
+        <a href="${report.newGameUrl}" target="_blank">New Game</a>
+        <hr>
+      `;
+      reportList.appendChild(li);
+    });
   });
 }

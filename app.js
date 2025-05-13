@@ -141,6 +141,7 @@ function loadReports() {
     if (!reports) return;
 
     const reportList = document.getElementById("report-list");
+    reportList.style.display = "block";
     reportList.innerHTML = "";
 
     Object.values(reports).forEach(report => {
@@ -155,4 +156,16 @@ function loadReports() {
       reportList.appendChild(li);
     });
   });
+}
+
+function minMaxReports() {
+  const reportList = document.getElementById("report-list");
+  const button = document.getElementById("min-max");
+  if (reportList.style.display == "block") {
+    reportList.style.display = "none";
+    button.setAttribute('Maximise Reports');
+  } else {
+    reportList.style.display = "block";
+    button.setAttribute('Minimise Reports');
+  }
 }

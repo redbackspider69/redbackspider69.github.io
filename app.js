@@ -16,6 +16,7 @@ const db = firebase.database();
 
 const signInBtn = document.getElementById("googleSignInBtn");
 const userInfo = document.getElementById("user-info");
+let currentUser = null;
 
 signInBtn.addEventListener("click", () => {
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -51,6 +52,7 @@ auth.onAuthStateChanged(async (user) => {
   if (user) {
     const uid = user.uid;
     const email = user.email;
+    currentUser = user;
     userInfo.innerText = `Signed in as ${user.displayName}`;
     signInBtn.style.display = "none";
 
@@ -105,7 +107,7 @@ function reportTroll() {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ reporterId: user.uid })  // must be the current user's UID
+    body: JSON.stringify({ reporterId: currentUser.uid })
   })
   .then(res => res.json())
   .then(data => {

@@ -221,7 +221,7 @@ async function loadMatches() {
     card.appendChild(title);
 
     const iframe = document.createElement('iframe');
-    iframe.src = `https://lichess.org/embed/${lichessGameId}?theme=auto&bg=auto`;
+    iframe.src = `https://lichess.org/embed/${lichessGameId}?theme=auto&bg=auto&move=last`;
     iframe.width = '240';
     iframe.height = '240';
     iframe.frameBorder = '0';

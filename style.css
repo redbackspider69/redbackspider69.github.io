@@ -63,15 +63,13 @@ body {
   
 .match-title {
     font-weight: 600;
-    margin-bottom: 0.75rem;
+    margin: 0 0 0.75rem 0;
     padding: 0 0.5rem;
-    white-space: normal;
-    overflow-wrap: break-word;
-    line-height: 1.2;
-    height: 2.4em; /* exactly 2 lines of space */
-    display: flex;
-    align-items: center; /* vertically center 1-line titles */
+    height: 2.6em;              /* fixed height for 2 lines */
+    line-height: 1.3em;         /* line spacing */
+    overflow: hidden;
     text-align: center;
+    white-space: normal;
   } 
   
   

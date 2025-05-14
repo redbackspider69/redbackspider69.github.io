@@ -1,3 +1,5 @@
+/* css almost entirely chatgpt generated, i don't like styling myself */
+
 body {
     margin: 0;
     padding: 0;
@@ -19,6 +21,9 @@ body {
   }  
   
 .match-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background: white;
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -26,12 +31,12 @@ body {
     margin: 0.5rem 0;
     min-width: 260px;
     max-width: 280px;
-    text-align: center;
+    height: 100%; /* Let the container control consistent height */
+    box-sizing: border-box;
     font-size: 0.95rem;
     line-height: 1.4;
-    box-sizing: border-box;
-  }  
-
+  }
+  
 .match-card iframe {
     width: 100%;
     height: auto;
@@ -48,17 +53,23 @@ body {
     text-decoration: none;
   }
   
-  .match-card a:hover {
+.match-card a:hover {
     text-decoration: underline;
   }
 
+.match-card a:last-child {
+    margin-top: auto;
+  }
+  
 .match-title {
     font-weight: 600;
     margin-bottom: 0.75rem;
     padding: 0 0.5rem;
     white-space: normal;
-    word-break: break-word;
+    overflow-wrap: break-word;
+    min-height: 2.4em; /* reserve space for 2 lines max */
   }
+  
   
 iframe {
     border-radius: 8px;
@@ -120,14 +131,14 @@ button:hover,
     background-color: #45a049;
   }
   
-#live-matches,
-#finished-matches {
+#live-matches, #finished-matches {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     gap: 1rem;
-    margin-top: 1rem;
-    justify-content: center;
-  }
+    align-items: stretch; /* Ensures cards match height */
+    padding-bottom: 1rem;
+  }  
   
 @media (prefers-color-scheme: dark) {
     body {

@@ -28,6 +28,17 @@ body {
     aspect-ratio: 1 / 1;
   }
   
+  iframe#userGame {
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 1 / 1;
+    border: none;
+    border-radius: 8px;
+    display: block;
+    margin: 1rem auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }  
+  
   #leaderboard {
     margin-top: 2rem;
     overflow-x: auto;

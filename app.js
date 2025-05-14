@@ -21,7 +21,7 @@ function isNumeric(str) {
   if (typeof str != "string") return false // we only process strings!  
   return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
          !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
-}
+} // from https://stackoverflow.com/a/175787
 
 signInBtn.addEventListener("click", () => {
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -142,13 +142,9 @@ async function checkIfFirstMove(gameId) {
     headers: { "Content-Type": "application/json" },
   });
   
-  const data = res.json();
+  const data = await res.json();
 
-  if (data.success) {
-    return data.gameStarted;
-  } else {
-    throw new Error("Failed to check if game has started")
-  }
+  return data.gameStarted;
 }
 
 function reportTroll() {

@@ -67,8 +67,12 @@ body {
     padding: 0 0.5rem;
     white-space: normal;
     overflow-wrap: break-word;
-    min-height: 2.4em; /* reserve space for 2 lines max */
-  }
+    line-height: 1.2;
+    height: 2.4em; /* exactly 2 lines of space */
+    display: flex;
+    align-items: center; /* vertically center 1-line titles */
+    text-align: center;
+  } 
   
   
 iframe {

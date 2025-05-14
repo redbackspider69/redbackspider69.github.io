@@ -88,5 +88,26 @@ button:hover {
     button:hover {
       background-color: #2563eb;
     }
+}
+
+/* unvisited link */
+a:link {
+    color: lightskyblue;
   }
   
+  /* visited link */
+a:visited {
+    color: #6d4b8d;
+  }
+  
+  /* mouse over link */
+a:hover {
+    color: #ffffff;
+  }
+  
+  /* selected link */
+a:active {
+    color: #ff4040; 
+    text-decoration: none; 
+    font-weight: normal;
+  }

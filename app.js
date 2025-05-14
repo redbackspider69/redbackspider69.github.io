@@ -41,10 +41,10 @@ auth.signInWithPopup(provider)
       }
     }
 
+    // Only create the user record if it doesn't exist
     const uid = user.uid;
     const userRef = db.ref("users/" + uid);
-
-    // Only create the user record if it doesn't exist
+    
     userRef.once("value").then((snapshot) => {
       if (!snapshot.exists()) {
         userRef.set({
@@ -53,7 +53,11 @@ auth.signInWithPopup(provider)
           score: 0,
           opponent: null,
           currentGameUrl: null
+        }).then(() => {
+          loadLeaderboard(); // Only call it after user is added
         });
+      } else {
+        loadLeaderboard(); // Call immediately if already exists
       }
     });
 
@@ -79,8 +83,6 @@ async function afterSignIn(user) {
       document.getElementById("admin-panel").style.display = "block";
       loadReports();
     }
-
-    loadLeaderboard();
 
     // Show current game
     const snap = await db.ref("users/" + uid).once("value");

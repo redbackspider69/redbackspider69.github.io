@@ -102,7 +102,8 @@ async function afterSignIn(user) {
       const gameId = url.pathname.slice(1);
       document.getElementById("userGame").src = `https://lichess.org/embed/${gameId}?theme=auto&bg=auto&move=last`;
     }
-
+    
+    loadLeaderboard()
     loadMatches();
   }
 }

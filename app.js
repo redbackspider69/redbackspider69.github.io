@@ -210,7 +210,7 @@ async function loadMatches() {
   Object.values(games).forEach(game => {
     const { lichessGameId, white, black, status } = game;
     if (!lichessGameId) return;
-    if (status != 'finished' || status != 'pending') return;
+    if (status != 'finished' && status != 'pending') return;
 
     const card = document.createElement('div');
     card.className = 'match-card';

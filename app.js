@@ -98,7 +98,9 @@ async function afterSignIn(user) {
       gameLink.href = userData.currentGameUrl;
       gameLink.innerText = "Join Your Game";
       document.getElementById("game-panel").style.display = "block";
-      document.getElementById("userGame").src = userData.currentGameUrl;
+      const url = new URL(userData.currentGameUrl)
+      const gameId = url.pathname.slice(1);
+      document.getElementById("userGame").src = `https://lichess.org/embed/${gameId}?theme=auto&bg=auto&move=last`;
     }
 
     loadMatches();

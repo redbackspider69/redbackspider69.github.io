@@ -29,9 +29,11 @@ body {
   }
   
 .match-title {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
+    min-height: 2.5em; /* Adjust depending on font size */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }  
   
 iframe {
     border-radius: 8px;

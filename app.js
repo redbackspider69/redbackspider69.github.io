@@ -79,6 +79,8 @@ if (user) {
     gameLink.innerText = "Join Your Game";
     document.getElementById("game-panel").style.display = "block";
   }
+
+  loadMatches();
 }
 });
 
@@ -168,4 +170,54 @@ function minMaxReports() {
     reportList.style.display = "block";
     button.innerHTML = 'Minimise Reports';
   }
-} 
+}
+
+async function loadMatches() {
+  const roundSnap = await db.ref('tournament/currentRound').once('value');
+  const roundNumber = roundSnap.val();
+  if (!roundNumber) return;
+
+  const gamesSnap = await db.ref(`rounds/${roundNumber}/games`).once('value');
+  const games = gamesSnap.val();
+  if (!games) return;
+
+  const liveContainer = document.getElementById('live-matches');
+  const finishedContainer = document.getElementById('finished-matches');
+  liveContainer.innerHTML = '';
+  finishedContainer.innerHTML = '';
+
+  Object.values(games).forEach(game => {
+    const { lichessGameId, white, black, status } = game;
+    if (!lichessGameId) return;
+
+    const card = document.createElement('div');
+    card.className = 'match-card';
+
+    const title = document.createElement('div');
+    title.className = 'match-title';
+    title.innerText = `${white} (White) vs. ${black} (Black)`;
+    card.appendChild(title);
+
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://lichess.org/embed/${lichessGameId}?theme=auto&bg=auto`;
+    iframe.width = '240';
+    iframe.height = '240';
+    iframe.frameBorder = '0';
+    iframe.style.borderRadius = '4px';
+    card.appendChild(iframe);
+
+    const viewBtn = document.createElement('a');
+    viewBtn.href = `https://lichess.org/${lichessGameId}`;
+    viewBtn.target = '_blank';
+    viewBtn.innerText = 'View Game';
+    viewBtn.style.display = 'block';
+    viewBtn.style.marginTop = '0.5rem';
+    card.appendChild(viewBtn);
+
+    if (status === 'pending') {
+      liveContainer.appendChild(card);
+    } else {
+      finishedContainer.appendChild(card);
+    }
+  });
+}

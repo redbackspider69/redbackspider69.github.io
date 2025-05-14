@@ -15,6 +15,7 @@ const db = firebase.database();
 const signInBtn = document.getElementById("googleSignInBtn");
 const userInfo = document.getElementById("user-info");
 let currentUser = null;
+let testEmailYet = false;
 
 function isNumeric(str) {
   if (typeof str != "string") return false // we only process strings!  
@@ -58,6 +59,7 @@ auth.signInWithPopup(provider)
 
     userInfo.innerText = `Signed in as ${user.displayName}`;
     signInBtn.style.display = "none";
+    afterSignIn(user)
   })
   .catch((error) => {
     console.error("Sign-in error:", error);
@@ -65,34 +67,34 @@ auth.signInWithPopup(provider)
   });
 });
 
-auth.onAuthStateChanged(async (user) => {
-if (user) {
-  const uid = user.uid;
-  const email = user.email;
-  currentUser = user;
-  userInfo.innerText = `Signed in as ${user.displayName}`;
-  signInBtn.style.display = "none";
+async function afterSignIn(user) {
+  if (user) {
+    const uid = user.uid;
+    const email = user.email;
+    currentUser = user;
+    userInfo.innerText = `Signed in as ${user.displayName}`;
+    signInBtn.style.display = "none";
 
-  if (email === "448705021@student.sbhs.nsw.edu.au") {
-    document.getElementById("admin-panel").style.display = "block";
-    loadReports();
+    if (email === "448705021@student.sbhs.nsw.edu.au") {
+      document.getElementById("admin-panel").style.display = "block";
+      loadReports();
+    }
+
+    loadLeaderboard();
+
+    // Show current game
+    const snap = await db.ref("users/" + uid).once("value");
+    const userData = snap.val();
+    if (userData && userData.currentGameUrl) {
+      const gameLink = document.getElementById("game-link");
+      gameLink.href = userData.currentGameUrl;
+      gameLink.innerText = "Join Your Game";
+      document.getElementById("game-panel").style.display = "block";
+    }
+
+    loadMatches();
   }
-
-  loadLeaderboard();
-
-  // Show current game
-  const snap = await db.ref("users/" + uid).once("value");
-  const userData = snap.val();
-  if (userData && userData.currentGameUrl) {
-    const gameLink = document.getElementById("game-link");
-    gameLink.href = userData.currentGameUrl;
-    gameLink.innerText = "Join Your Game";
-    document.getElementById("game-panel").style.display = "block";
-  }
-
-  loadMatches();
 }
-});
 
 function loadLeaderboard() {
 db.ref("users").once("value").then(snapshot => {

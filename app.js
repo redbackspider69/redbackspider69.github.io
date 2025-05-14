@@ -71,6 +71,12 @@ auth.signInWithPopup(provider)
   });
 });
 
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    afterSignIn(user);
+  }
+});
+
 async function afterSignIn(user) {
   if (user) {
     const uid = user.uid;
@@ -224,7 +230,6 @@ async function loadMatches() {
     iframe.src = `https://lichess.org/embed/${lichessGameId}?theme=auto&bg=auto&move=last`;
     iframe.width = '240';
     iframe.height = '240';
-    iframe.frameBorder = '0';
     iframe.style.borderRadius = '4px';
     card.appendChild(iframe);
 
@@ -243,3 +248,14 @@ async function loadMatches() {
     }
   });
 }
+/*
+// Reload matches every 30 seconds
+setInterval(() => {
+  loadMatches();
+}, 30000);
+
+// Reload leaderboard every 30 seconds
+setInterval(() => {
+  loadLeaderboard();
+}, 30000);
+*/

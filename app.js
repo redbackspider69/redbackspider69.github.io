@@ -85,6 +85,7 @@ async function afterSignIn(user) {
     userInfo.innerText = `Signed in as ${user.displayName}`;
     signInBtn.style.display = "none";
 
+    // Only shows admin panel to me
     if (email === "448705021@student.sbhs.nsw.edu.au") {
       document.getElementById("admin-panel").style.display = "block";
       loadReports();
@@ -109,56 +110,72 @@ async function afterSignIn(user) {
 }
 
 function loadLeaderboard() {
-db.ref("users").once("value").then(snapshot => {
-  const users = snapshot.val();
-  const leaderboard = Object.values(users).sort((a, b) => (b.score || 0) - (a.score || 0));
+  db.ref("users").once("value").then(snapshot => {
+    const users = snapshot.val();
+    const leaderboard = Object.values(users).sort((a, b) => (b.score || 0) - (a.score || 0));
 
-  const tbody = document.querySelector("#leaderboard tbody");
-  tbody.innerHTML = "";
-  leaderboard.forEach(user => {
-    const row = document.createElement("tr");
-    row.innerHTML = `<td>${user.name}</td><td>${user.score || 0}</td>`;
-    tbody.appendChild(row);
+    const tbody = document.querySelector("#leaderboard tbody");
+    tbody.innerHTML = "";
+    leaderboard.forEach(user => {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${user.name}</td><td>${user.score || 0}</td>`;
+      tbody.appendChild(row);
+    });
   });
-});
 }
 
 function checkResults() {
-fetch("https://year8-chess-tournament-backend.glitch.me/check-results", { method: "POST" })
-  .then(res => res.json())
-  .then(data => alert(`Updated games: ${data.updatedGames.length}`));
+  fetch("https://year8-chess-tournament-backend.glitch.me/check-results", { method: "POST" })
+    .then(res => res.json())
+    .then(data => alert(`Updated games: ${data.updatedGames.length}`));
 }
 
 function startRound() {
-fetch("https://year8-chess-tournament-backend.glitch.me/start-round", { method: "POST" })
-  .then(res => res.json())
-  .then(data => alert(`Started new round with ${data.pairings} games.`));
+  fetch("https://year8-chess-tournament-backend.glitch.me/start-round", { method: "POST" })
+    .then(res => res.json())
+    .then(data => alert(`Started new round with ${data.pairings} games.`));
+}
+
+async function checkIfFirstMove(gameId) {
+  const res = await fetch(`https://year8-chess-tournament-backend.glitch.me/check-if-first-move?gameId=${gameId}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  
+  const data = res.json();
+
+  if (data.success) {
+    return data.gameStarted;
+  } else {
+    throw new Error("Failed to check if game has started")
+  }
 }
 
 function reportTroll() {
-if (!currentUser) {
-  alert("Please sign in first.");
-  return;
-}
+  if (!currentUser) {
+    alert("Please sign in first.");
+    return;
+  }
 
-fetch("https://year8-chess-tournament-backend.glitch.me/report-troll", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ reporterId: currentUser.uid })
-})
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      alert("New game created. Use your new link.");
-    } else {
-      alert("Failed to create a new game.");
-      console.error("Backend error:", data.error || data);
-    }
+  fetch("https://year8-chess-tournament-backend.glitch.me/report-troll", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ reporterId: currentUser.uid })
   })
-  .catch((err) => {
-    alert("Failed to reach server.");
-    console.error("Fetch error:", err);
-  });
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        afterSignIn(currentUser);
+        alert("New game created. Use your new link.");
+      } else {
+        alert("Failed to create a new game.");
+        console.error("Backend error:", data.error || data);
+      }
+    })
+    .catch((err) => {
+      alert("Failed to reach server.");
+      console.error("Fetch error:", err);
+    });
 }
 
 function loadReports() {
@@ -217,10 +234,12 @@ async function loadMatches() {
   liveContainer.innerHTML = '';
   finishedContainer.innerHTML = '';
 
-  Object.values(games).forEach(game => {
+  for (const game of Object.values(games)) {
     const { lichessGameId, white, black, status } = game;
-    if (!lichessGameId) return;
-    if (status != 'finished' && status != 'pending') return;
+    if (!lichessGameId) continue;
+    if (status != 'finished' && status != 'pending') continue;
+    const hasStarted = await checkIfFirstMove(lichessGameId);
+    if (!hasStarted) continue;
 
     const card = document.createElement('div');
     card.className = 'match-card';
@@ -250,7 +269,7 @@ async function loadMatches() {
     } else {
       finishedContainer.appendChild(card);
     }
-  });
+  }
 }
 /*
 // Reload matches every 30 seconds

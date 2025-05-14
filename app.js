@@ -177,9 +177,16 @@ async function loadMatches() {
   const roundNumber = roundSnap.val();
   if (!roundNumber) return;
 
-  const gamesSnap = await db.ref(`rounds/${roundNumber}/games`).once('value');
+  const [gamesSnap, usersSnap] = await Promise.all([
+    db.ref(`rounds/${roundNumber}/games`).once('value'),
+    db.ref('users').once('value')
+  ]);
+
   const games = gamesSnap.val();
-  if (!games) return;
+  const users = usersSnap.val();
+  if (!games || !users) return;
+
+  const getName = uid => (users[uid]?.name || "Unknown");
 
   const liveContainer = document.getElementById('live-matches');
   const finishedContainer = document.getElementById('finished-matches');
@@ -195,7 +202,7 @@ async function loadMatches() {
 
     const title = document.createElement('div');
     title.className = 'match-title';
-    title.innerText = `${white} (White) vs. ${black} (Black)`;
+    title.innerText = `${getName(white)} (White) vs. ${getName(black)} (Black)`;
     card.appendChild(title);
 
     const iframe = document.createElement('iframe');

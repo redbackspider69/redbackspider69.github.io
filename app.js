@@ -16,18 +16,28 @@ const signInBtn = document.getElementById("googleSignInBtn");
 const userInfo = document.getElementById("user-info");
 let currentUser = null;
 
+function isNumeric(str) {
+  if (typeof str != "string") return false // we only process strings!  
+  return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+         !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+}
+
 signInBtn.addEventListener("click", () => {
 const provider = new firebase.auth.GoogleAuthProvider();
 auth.signInWithPopup(provider)
   .then((result) => {
+    const testing = true;
+
     const user = result.user;
     const email = user.email;
 
     console.log(email);
-    if (!email.endsWith("@student.sbhs.nsw.edu.au")) {
-      alert("Please use your school Google account.");
-      auth.signOut();
-      return;
+    if (testing === false) {
+      if (!email.endsWith("@student.sbhs.nsw.edu.au") || !isNumeric(email[0])) {
+        alert("Please use your @student.sbhs.nsw.edu.au account to prevent double accounts.");
+        auth.signOut();
+        return;
+      }
     }
 
     const uid = user.uid;
@@ -196,6 +206,7 @@ async function loadMatches() {
   Object.values(games).forEach(game => {
     const { lichessGameId, white, black, status } = game;
     if (!lichessGameId) return;
+    if (status != 'finished' || status != 'pending') return;
 
     const card = document.createElement('div');
     card.className = 'match-card';

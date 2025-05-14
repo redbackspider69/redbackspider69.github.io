@@ -126,23 +126,18 @@ button:hover,
   
 /* Responsive adjustments for small screens */
 @media (max-width: 600px) {
-    .match-card {
-      padding: 0.8rem;
-      font-size: 0.9rem;
+    #container {
+      padding: 0.5rem;
+    }
+  
+    iframe#userGame {
       max-width: 100%;
     }
   
-    button,
-    #googleSignInBtn {
-      width: 100%;
-      font-size: 1rem;
-    }
-  
-    #leaderboard th,
-    #leaderboard td {
+    table {
       font-size: 0.9rem;
     }
-  }
+  }  
   
 /* Link styles */
 a:link {

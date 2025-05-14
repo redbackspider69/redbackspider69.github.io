@@ -14,42 +14,44 @@
   <link href="https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Welcome to the Year 8 Chess Tournament</h1>
-  
-  <div id="user-section">
-    <button id="googleSignInBtn">Sign in with Google</button>
-    <p id="user-info"></p>
+  <div id="container">
+    <h1>Welcome to the Year 8 Chess Tournament</h1>
+    
+    <div id="user-section">
+      <button id="googleSignInBtn">Sign in with Google</button>
+      <p id="user-info"></p>
+    </div>
+
+    <div id="game-panel" style="display:none; text-align: center;">
+      <h2>Your Current Game</h2>
+      <a id="game-link" href="#" target="_blank">Join Game</a><br><br>
+      <iframe id="userGame" src="" allowfullscreen></iframe>
+      <br>
+      <button onclick="reportTroll()">Report Opponent</button>
+    </div>  
+
+    <h2>Leaderboard</h2>
+    <table id="leaderboard">
+      <thead>
+        <tr><th>Name</th><th>Score</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div id="admin-panel" style="display:none;">
+      <h2>Admin Panel</h2>
+      <button onclick="startRound()">Start New Round</button>
+      <button onclick="checkResults()">Check Results</button>
+      <h3>Troll Reports</h3>
+      <ul id="report-list" style="display:none;"></ul>
+      <button id="min-max" onclick="minMaxReports()">Minimise Reports</button>
+    </div>
+
+    <h2>Live Games</h2>
+    <div id="live-matches" class="matches-grid"></div>
+    
+    <h2>Finished Games</h2>
+    <div id="finished-matches" class="matches-grid"></div>  
   </div>
-
-  <div id="game-panel" style="display:none; text-align: center;">
-    <h2>Your Current Game</h2>
-    <a id="game-link" href="#" target="_blank">Join Game</a><br><br>
-    <iframe id="userGame" src="" allowfullscreen></iframe>
-    <br>
-    <button onclick="reportTroll()">Report Opponent</button>
-  </div>  
-
-  <h2>Leaderboard</h2>
-  <table id="leaderboard">
-    <thead>
-      <tr><th>Name</th><th>Score</th></tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-
-  <div id="admin-panel" style="display:none;">
-    <h2>Admin Panel</h2>
-    <button onclick="startRound()">Start New Round</button>
-    <button onclick="checkResults()">Check Results</button>
-    <h3>Troll Reports</h3>
-    <ul id="report-list" style="display:none;"></ul>
-    <button id="min-max" onclick="minMaxReports()">Minimise Reports</button>
-  </div>
-
-  <h2>Live Games</h2>
-  <div id="live-matches" class="matches-grid"></div>
-  
-  <h2>Finished Games</h2>
-  <div id="finished-matches" class="matches-grid"></div>  
 </body>
 </html>

@@ -3,6 +3,7 @@
 <head>
   <title>Year 8 Chess Tournament</title>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
@@ -20,6 +21,13 @@
     <p id="user-info"></p>
   </div>
 
+  <div id="game-panel" style="display:none;">
+    <h2>Your Current Game</h2>
+    <a id="game-link" href="#" target="_blank">Join Game</a><br><br>
+    <iframe id="userGame" src="" width="240" height="240"></iframe>
+    <button onclick="reportTroll()">Report Opponent</button>
+  </div>
+
   <h2>Leaderboard</h2>
   <table id="leaderboard">
     <thead>
@@ -35,12 +43,6 @@
     <h3>Troll Reports</h3>
     <ul id="report-list" style="display:none;"></ul>
     <button id="min-max" onclick="minMaxReports()">Minimise Reports</button>
-  </div>
-  
-  <div id="game-panel" style="display:none;">
-    <h2>Your Current Game</h2>
-    <a id="game-link" href="#" target="_blank">Join Game</a><br><br>
-    <button onclick="reportTroll()">Report Opponent</button>
   </div>
 
   <h2>Live Games</h2>

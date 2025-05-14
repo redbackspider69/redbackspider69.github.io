@@ -98,6 +98,7 @@ async function afterSignIn(user) {
       gameLink.href = userData.currentGameUrl;
       gameLink.innerText = "Join Your Game";
       document.getElementById("game-panel").style.display = "block";
+      document.getElementById("userGame").src = userData.currentGameUrl;
     }
 
     loadMatches();

@@ -161,3 +161,25 @@ a:active {
     text-decoration: none;
     font-weight: normal;
   }  
+
+.scroll-container {
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+  
+.matches-row {
+    display: flex;
+    gap: 1rem;
+    min-width: max-content;
+  }
+
+.scroll-container::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+  }
+  
+  

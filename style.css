@@ -19,19 +19,46 @@ body {
   }  
   
 .match-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 400px; /* fixed total height */
-    justify-content: space-between; /* distribute inner elements */
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 1rem;
+    margin: 0.5rem 0;
+    min-width: 260px;
+    max-width: 280px;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    box-sizing: border-box;
   }  
+
+.match-card iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1; /* keeps it square */
+    border-radius: 8px;
+    border: none;
+  }  
+
+.match-card a {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: #3b82f6;
+    text-decoration: none;
+  }
   
+  .match-card a:hover {
+    text-decoration: underline;
+  }
+
 .match-title {
-    min-height: 2.5em; /* Adjust depending on font size */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }  
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    padding: 0 0.5rem;
+    white-space: normal;
+    word-break: break-word;
+  }
   
 iframe {
     border-radius: 8px;

@@ -233,6 +233,9 @@ async function loadMatches() {
   liveContainer.innerHTML = '';
   finishedContainer.innerHTML = '';
 
+  const total = gameEntries.length;
+  let loaded = 0;
+
   for (const game of Object.values(games)) {
     const { lichessGameId, white, black, status } = game;
     if (!lichessGameId) continue;
@@ -268,7 +271,12 @@ async function loadMatches() {
     } else {
       finishedContainer.appendChild(card);
     }
+
+    loaded++;
+    const percent = Math.round((loaded / total) * 100);
+    document.getElementById('games-loading-bar').style.width = `${percent}%`;
   }
+  document.getElementById('games-loading-bar-container').style.display = 'none';
 }
 
 function hideIframeLoader(iframe) {

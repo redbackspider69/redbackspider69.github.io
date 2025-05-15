@@ -261,4 +261,19 @@ a:active {
     border-radius: 4px;
   }
   
+#games-loading-bar-container {
+    height: 6px;
+    width: 100%;
+    background-color: #ddd;
+    margin: 1rem 0;
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+  }
   
+#games-loading-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #4CAF50;
+    transition: width 0.2s ease;
+  }  

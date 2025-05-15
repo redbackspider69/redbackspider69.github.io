@@ -96,13 +96,9 @@ iframe#userGame {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 360px;
-    height: 360px;
-  }
-  
-#userGame {
+    width: 100%; /* Full width to center contents inside */
     max-width: 100%;
-    border-radius: 8px;
+    margin: 0 auto;
   }
   
 .iframe-loader {

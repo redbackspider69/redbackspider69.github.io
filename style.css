@@ -148,6 +148,13 @@ iframe#userGame {
     background: #f0f0f0;
   }
   
+#leaderboard-loader {
+    height: 4px;
+    width: 0%;
+    background-color: #4CAF50;
+    transition: width 0.3s ease;
+  }
+  
 button,
 #googleSignInBtn {
     background-color: #4caf50;

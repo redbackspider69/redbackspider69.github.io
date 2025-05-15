@@ -104,12 +104,12 @@ async function afterSignIn(user) {
       document.getElementById("userGame").src = `https://lichess.org/embed/${gameId}?theme=auto&bg=auto&move=last`;
     }
     
-    loadLeaderboard()
     loadMatches();
   }
 }
 
 function loadLeaderboard() {
+  document.getElementById('leaderboard-loader').style.width = '100%';
   db.ref("users").once("value").then(snapshot => {
     const users = snapshot.val();
     const leaderboard = Object.values(users).sort((a, b) => (b.score || 0) - (a.score || 0));
@@ -122,6 +122,9 @@ function loadLeaderboard() {
       tbody.appendChild(row);
     });
   });
+  setTimeout(() => {
+    document.getElementById('leaderboard-loader').style.width = '0%';
+  }, 300); // delay so users see the bar  
 }
 
 function checkResults() {

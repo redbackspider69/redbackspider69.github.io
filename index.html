@@ -42,15 +42,6 @@
       <tbody></tbody>
     </table>
 
-    <div id="admin-panel" style="display:none;">
-      <h2>Admin Panel</h2>
-      <button onclick="startRound()">Start New Round</button>
-      <button onclick="checkResults()">Check Results</button>
-      <h3>Troll Reports</h3>
-      <ul id="report-list" style="display:none;"></ul>
-      <button id="min-max" onclick="minMaxReports()">Minimise Reports</button>
-    </div>
-
     <div id="games-loading-bar-container">
       <div id="games-loading-bar"></div>
     </div>    
@@ -62,7 +53,16 @@
     <h2>Finished Games</h2> 
     <div class="scroll-container">
       <div id="finished-matches" class="matches-row"></div>
-    </div>    
+    </div>  
+    
+    <div id="admin-panel" style="display:none;">
+      <h2>Admin Panel</h2>
+      <button onclick="startRound()">Start New Round</button>
+      <button onclick="checkResults()">Check Results</button>
+      <h3>Troll Reports</h3>
+      <ul id="report-list" style="display:none;"></ul>
+      <button id="min-max" onclick="minMaxReports()">Minimise Reports</button>
+    </div>
   </div>
 </body>
 </html>

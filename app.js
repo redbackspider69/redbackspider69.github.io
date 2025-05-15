@@ -283,7 +283,7 @@ function loadLeaderboard() {
     leaderboardData = Object.entries(users)
       .map(([uid, data]) => ({
         uid,
-        name: data.name || "Anonymous",
+        name: data.name,
         score: data.score || 0
       }))
       .sort((a, b) => b.score - a.score);
@@ -300,6 +300,8 @@ function renderLeaderboard() {
   const tbody = document.querySelector("#leaderboard tbody");
   tbody.innerHTML = "";
 
+  let placing = 1;
+  let lastScore = null;
   let shown = 0;
   let userIsShown = false;
 
@@ -308,14 +310,21 @@ function renderLeaderboard() {
     const isCurrentUser = user.uid === currentUserUid;
     const withinVisible = shown < currentVisibleCount;
 
-    if (withinVisible || isCurrentUser) {
+    if (withinVisible || (isCurrentUser && !userIsShown)) {
+      if (lastScore !== null && user.score < lastScore) {
+        placing = shown + 1; // so 1st = index 0 + 1, etc.
+      }
+
       const row = document.createElement("tr");
-      row.innerHTML = `<td>${user.name}</td><td>${user.score}</td>`;
+      row.innerHTML = `<td>${placing}</td><td>${user.name}</td><td>${user.score}</td>`;
       if (isCurrentUser) row.style.fontWeight = 'bold';
+
       tbody.appendChild(row);
 
       if (!isCurrentUser) shown++;
-      if (isCurrentUser) userIsShown = true;
+      else userIsShown = true; row.classList.add("highlighted-user");
+
+      lastScore = user.score;
     }
   }
 

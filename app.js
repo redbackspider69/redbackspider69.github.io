@@ -15,7 +15,7 @@ const db = firebase.database();
 const signInBtn = document.getElementById("googleSignInBtn");
 const userInfo = document.getElementById("user-info");
 let currentUser = null;
-let testEmailYet = false;
+let currentUserUid = null;
 
 function isNumeric(str) {
   if (typeof str != "string") return false // we only process strings!  
@@ -82,6 +82,7 @@ async function afterSignIn(user) {
     const uid = user.uid;
     const email = user.email;
     currentUser = user;
+    currentUserUid = uid;
     userInfo.innerText = `Signed in as ${user.displayName}`;
     signInBtn.style.display = "none";
 
@@ -117,25 +118,6 @@ function hideIframeLoader(iframe) {
   const wrapper = iframe.parentElement;
   wrapper.querySelector('.iframe-loader').style.display = 'none';
   iframe.style.visibility = 'visible';
-}
-
-function loadLeaderboard() {
-  document.getElementById('leaderboard-loader').style.width = '100%';
-  db.ref("users").once("value").then(snapshot => {
-    const users = snapshot.val();
-    const leaderboard = Object.values(users).sort((a, b) => (b.score || 0) - (a.score || 0));
-
-    const tbody = document.querySelector("#leaderboard tbody");
-    tbody.innerHTML = "";
-    leaderboard.forEach(user => {
-      const row = document.createElement("tr");
-      row.innerHTML = `<td>${user.name}</td><td>${user.score || 0}</td>`;
-      tbody.appendChild(row);
-    });
-  });
-  setTimeout(() => {
-    document.getElementById('leaderboard-loader').style.width = '0%';
-  }, 300); // delay so users see the bar  
 }
 
 function checkResults() {
@@ -289,6 +271,72 @@ async function loadMatches() {
   }
   document.getElementById('games-loading-bar-container').style.display = 'none';
 }
+
+let leaderboardData = [];
+let currentVisibleCount = 5;
+
+function loadLeaderboard() {
+  document.getElementById('leaderboard-loader').style.width = '100%';
+
+  db.ref("users").once("value").then(snapshot => {
+    const users = snapshot.val();
+    leaderboardData = Object.entries(users)
+      .map(([uid, data]) => ({
+        uid,
+        name: data.name || "Anonymous",
+        score: data.score || 0
+      }))
+      .sort((a, b) => b.score - a.score);
+
+    renderLeaderboard();
+
+    setTimeout(() => {
+      document.getElementById('leaderboard-loader').style.width = '0%';
+    }, 300);
+  });
+}
+
+function renderLeaderboard() {
+  const tbody = document.querySelector("#leaderboard tbody");
+  tbody.innerHTML = "";
+
+  let shown = 0;
+  let userIsShown = false;
+
+  for (let i = 0; i < leaderboardData.length; i++) {
+    const user = leaderboardData[i];
+    const isCurrentUser = user.uid === currentUserUid;
+    const withinVisible = shown < currentVisibleCount;
+
+    if (withinVisible || isCurrentUser) {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${user.name}</td><td>${user.score}</td>`;
+      if (isCurrentUser) row.style.fontWeight = 'bold';
+      tbody.appendChild(row);
+
+      if (!isCurrentUser) shown++;
+      if (isCurrentUser) userIsShown = true;
+    }
+  }
+
+  document.getElementById('show-more-btn').style.display =
+    shown < leaderboardData.length ? 'inline-block' : 'none';
+
+  document.getElementById('minimise-btn').style.display =
+    currentVisibleCount > 5 ? 'inline-block' : 'none';
+}
+
+// Button event listeners
+
+document.getElementById('show-more-btn').addEventListener('click', () => {
+  currentVisibleCount += 20;
+  renderLeaderboard();
+});
+
+document.getElementById('minimise-btn').addEventListener('click', () => {
+  currentVisibleCount = 5;
+  renderLeaderboard();
+});
 
 /*
 // Reload matches every 30 seconds

@@ -234,7 +234,7 @@ async function loadMatches() {
   for (const game of Object.values(games)) {
     const { lichessGameId, white, black, status } = game;
     if (!lichessGameId) continue;
-    if (status != 'finished' && status != 'pending') continue;
+    if (status != 'completed' && status != 'pending') continue;
     const hasStarted = await checkIfFirstMove(lichessGameId);
     if (!hasStarted) continue;
 

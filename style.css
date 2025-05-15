@@ -1,5 +1,9 @@
 /* css almost entirely chatgpt generated, i don't like styling myself */
 
+html {
+    font-size: 18px; /* Default is usually 16px — increase as needed */
+  }  
+
 body {
     margin: 0;
     padding: 0;

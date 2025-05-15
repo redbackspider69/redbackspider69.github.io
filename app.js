@@ -228,6 +228,8 @@ async function loadMatches() {
 
   const total = Object.values(games).length;
   let loaded = 0;
+  let loadedLive = 0;
+  let loadedFinished = 0;
 
   for (const game of Object.values(games)) {
     const { lichessGameId, white, black, status } = game;
@@ -261,14 +263,24 @@ async function loadMatches() {
 
     if (status === 'pending') {
       liveContainer.appendChild(card);
+      loadedLive++;
     } else {
       finishedContainer.appendChild(card);
+      loadedFinished++;
     }
 
     loaded++;
     const percent = Math.round((loaded / total) * 100);
     document.getElementById('games-loading-bar').style.width = `${percent}%`;
   }
+
+  if (loadedLive = 0) {
+    document.getElementById("noLiveGames").style.display = "block";
+  }
+  if (loadedFinished = 0) {
+    document.getElementById("noFinishedGames").style.display = "block";
+  }
+
   document.getElementById('games-loading-bar-container').style.display = 'none';
 }
 

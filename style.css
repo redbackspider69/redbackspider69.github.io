@@ -166,9 +166,10 @@ iframe {
   }
   
 .highlighted-user {
-    background-color: #ffeaa7;
+    background-color: #2d3748; /* or one of the other colors above */
     font-weight: bold;
-  }
+    color: #fff; /* ensures text stays readable */
+  }  
   
 button,
 #googleSignInBtn {

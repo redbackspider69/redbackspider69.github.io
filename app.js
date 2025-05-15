@@ -274,10 +274,10 @@ async function loadMatches() {
     document.getElementById('games-loading-bar').style.width = `${percent}%`;
   }
 
-  if (loadedLive = 0) {
+  if (loadedLive === 0) {
     document.getElementById("noLiveGames").style.display = "block";
   }
-  if (loadedFinished = 0) {
+  if (loadedFinished === 0) {
     document.getElementById("noFinishedGames").style.display = "block";
   }
 

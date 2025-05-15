@@ -24,13 +24,13 @@
 
     <div id="game-panel" style="display:none; text-align: center;">
       <h2>Your Current Game</h2>
-      <a id="game-link" href="#" target="_blank">Join Game</a><br><br>
+      <a id="game-link" href="#" target="_blank"><button>Join Game</button></a><br><br>
       <div class="iframe-wrapper">
         <div class="iframe-loader"></div>
         <iframe id="userGame" src="" onload="hideIframeLoader(this)"></iframe>
       </div>      
       <br>
-      <button onclick="reportTroll()">Report Opponent</button>
+      <button id="reportButton" style="display:none;" onclick="reportTroll()">Report Opponent</button>
     </div>  
 
     <h2>Leaderboard</h2>

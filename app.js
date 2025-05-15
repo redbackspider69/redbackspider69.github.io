@@ -102,6 +102,10 @@ async function afterSignIn(user) {
       const url = new URL(userData.currentGameUrl)
       const gameId = url.pathname.slice(1);
       document.getElementById("userGame").src = `https://lichess.org/embed/${gameId}?theme=auto&bg=auto&move=last`;
+
+      if (!checkIfFirstMove(gameId)) {
+      document.getElementById("reportButton").style.display = "block";
+      } // display report button only if match hasn't started
     }
     
     loadLeaderboard();

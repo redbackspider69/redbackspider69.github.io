@@ -108,6 +108,12 @@ async function afterSignIn(user) {
   }
 }
 
+function hideIframeLoader(iframe) {
+  const wrapper = iframe.parentElement;
+  wrapper.querySelector('.iframe-loader').style.display = 'none';
+  iframe.style.visibility = 'visible';
+}
+
 function loadLeaderboard() {
   document.getElementById('leaderboard-loader').style.width = '100%';
   db.ref("users").once("value").then(snapshot => {
@@ -277,12 +283,6 @@ async function loadMatches() {
     document.getElementById('games-loading-bar').style.width = `${percent}%`;
   }
   document.getElementById('games-loading-bar-container').style.display = 'none';
-}
-
-function hideIframeLoader(iframe) {
-  const wrapper = iframe.parentElement;
-  wrapper.querySelector('.iframe-loader').style.display = 'none';
-  iframe.style.visibility = 'visible';
 }
 
 /*

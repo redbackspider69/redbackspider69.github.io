@@ -267,6 +267,13 @@ async function loadMatches() {
     }
   }
 }
+
+function hideIframeLoader(iframe) {
+  const wrapper = iframe.parentElement;
+  wrapper.querySelector('.iframe-loader').style.display = 'none';
+  iframe.style.visibility = 'visible';
+}
+
 /*
 // Reload matches every 30 seconds
 setInterval(() => {

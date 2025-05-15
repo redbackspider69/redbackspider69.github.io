@@ -322,7 +322,7 @@ function renderLeaderboard() {
       tbody.appendChild(row);
 
       if (!isCurrentUser) shown++;
-      else userIsShown = true; row.classList.add("highlighted-user");
+      else { userIsShown = true; row.classList.add("highlighted-user"); }
 
       lastScore = user.score;
     }

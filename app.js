@@ -233,7 +233,7 @@ async function loadMatches() {
   liveContainer.innerHTML = '';
   finishedContainer.innerHTML = '';
 
-  const total = gameEntries.length;
+  const total = Object.values(games).length;
   let loaded = 0;
 
   for (const game of Object.values(games)) {

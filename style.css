@@ -93,7 +93,7 @@ iframe {
   
 .iframe-wrapper {
     width: 100%;
-    max-width: 360px;
+    max-width: 370px;
     aspect-ratio: 1 / 1;
     margin: 0 auto;
     position: relative;

@@ -114,6 +114,17 @@ iframe {
     border-radius: 8px;
     display: block;
   }  
+
+.resize-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    bottom: 0;
+    right: 0;
+    background: url('data:image/svg+xml;utf8,<svg fill="gray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M0 10h10V0"/></svg>') no-repeat center;
+    cursor: se-resize;
+    pointer-events: none; /* let native resize still work */
+  }  
   
 .iframe-loader {
     position: absolute;

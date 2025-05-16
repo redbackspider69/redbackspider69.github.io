@@ -1,314 +1,308 @@
 /* css almost entirely chatgpt generated, i don't like styling myself */
 
 html {
-    font-size: 18px; /* Default is usually 16px — increase as needed */
-  }  
+  font-size: 18px; /* Default is usually 16px — increase as needed */
+}  
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Zain', sans-serif;
-    background-color: #f9f9f9;
-    color: #222;
-  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
+  margin: 0;
+  padding: 0;
+  font-family: 'Zain', sans-serif;
+  background-color: #f9f9f9;
+  color: #222;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
 #container {
-    width: 90%;
-    max-width: 1600px;
-    padding: 1rem;
-    text-align: center;
-    margin: 0 auto;
-    box-sizing: border-box;
-  }  
-  
+  width: 90%;
+  max-width: 1600px;
+  padding: 1rem;
+  text-align: center;
+  margin: 0 auto;
+  box-sizing: border-box;
+}  
+
 .match-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    padding: 1rem;
-    margin: 0.5rem 0;
-    min-width: 260px;
-    max-width: 280px;
-    height: 100%; /* Let the container control consistent height */
-    box-sizing: border-box;
-    font-size: 0.95rem;
-    line-height: 1.4;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  padding: 1rem;
+  margin: 0.5rem 0;
+  min-width: 260px;
+  max-width: 280px;
+  height: 100%; /* Let the container control consistent height */
+  box-sizing: border-box;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
 .match-card iframe {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1; /* keeps it square */
-    border-radius: 8px;
-    border: none;
-  }  
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1; /* keeps it square */
+  border-radius: 8px;
+  border: none;
+}  
 
 .match-card a {
-    display: inline-block;
-    margin-top: 0.75rem;
-    font-size: 0.9rem;
-    color: #3b82f6;
-    text-decoration: none;
-  }
-  
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: #3b82f6;
+  text-decoration: none;
+}
+
 .match-card a:hover {
-    text-decoration: underline;
-  }
+  text-decoration: underline;
+}
 
 .match-card a:last-child {
-    margin-top: auto;
-  }
-  
+  margin-top: auto;
+}
+
 .match-title {
-    font-weight: 600;
-    margin: 0 0 0.75rem 0;
-    padding: 0 0.5rem;
-    height: 2.6em;              /* fixed height for 2 lines */
-    line-height: 1.3em;         /* line spacing */
-    overflow: hidden;
-    text-align: center;
-    white-space: normal;
-  } 
-  
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+  padding: 0 0.5rem;
+  height: 2.6em;              /* fixed height for 2 lines */
+  line-height: 1.3em;         /* line spacing */
+  overflow: hidden;
+  text-align: center;
+  white-space: normal;
+} 
+
 iframe {
-    border-radius: 8px;
-    width: 100%;
-    height: 240px;
-    aspect-ratio: 1 / 1;
-  }
+  border-radius: 8px;
+  width: 100%;
+  height: 240px;
+  aspect-ratio: 1 / 1;
+}
 
 #iframe-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .iframe-wrapper {
-    resize: both;
-    overflow: auto;
-    width: 360px;
-    height: 370px; /* 360 board + ~10px for moves list if needed */
-    max-width: 100%;
-    max-height: 90vh;
-    min-width: 300px;
-    min-height: 300px;
-    margin: 1rem auto;
-    border: 1px solid #444;
-    border-radius: 8px;
-    background-color: #2e2e2e; /* Matches Lichess dark theme */
-    display: block;
-  }
-  
+  display: inline-block;
+  resize: vertical;
+  overflow: auto;
+  padding: 0;
+  border: 1px solid transparent; /* enables the grab area */
+  max-height: 600px;
+  min-height: 360px;
+}
+
+#iframe-wrapper iframe,
 #userGame {
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 8px;
-    display: block;
-  }  
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+}  
 
 .resize-corner {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    bottom: 0;
-    right: 0;
-    background: url('data:image/svg+xml;utf8,<svg fill="gray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M0 10h10V0"/></svg>') no-repeat center;
-    cursor: se-resize;
-    pointer-events: none; /* let native resize still work */
-  }  
-  
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  bottom: 0;
+  right: 0;
+  background: url('data:image/svg+xml;utf8,<svg fill="gray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M0 10h10V0"/></svg>') no-repeat center;
+  cursor: se-resize;
+  pointer-events: none; /* let native resize still work */
+}  
+
 .iframe-loader {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 40px;
-    height: 40px;
-    margin: -20px 0 0 -20px;
-    border: 4px solid #ccc;
-    border-top: 4px solid #4CAF50;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 4px solid #ccc;
+  border-top: 4px solid #4CAF50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 2;
+}
+
+.iframe-wrapper iframe {
+  position: relative;
+  z-index: 1;
+  visibility: hidden;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
-  
-  .iframe-wrapper iframe {
-    position: relative;
-    z-index: 1;
-    visibility: hidden;
-  }
-  
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }  
-  
+}  
+
 #leaderboard {
-    margin: 2rem auto;
-    overflow-x: auto;
-    text-align: center;
-    max-width: 600px;
-  }
-  
+  margin: 2rem auto;
+  overflow-x: auto;
+  text-align: center;
+  max-width: 600px;
+}
+
 #leaderboard table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    margin: 0 auto;
-  }
-  
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  margin: 0 auto;
+}
+
 #leaderboard th,
 #leaderboard td {
-    padding: 0.5rem;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-  }
-  
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
 #leaderboard th {
-    background: #f0f0f0;
-  }
-  
+  background: #f0f0f0;
+}
+
 #leaderboard-loader {
-    height: 4px;
-    width: 0%;
-    background-color: #4CAF50;
-    transition: width 0.3s ease;
-  }
-  
+  height: 4px;
+  width: 0%;
+  background-color: #4CAF50;
+  transition: width 0.3s ease;
+}
+
 .highlighted-user {
-    background-color: #2d3748; /* or one of the other colors above */
-    font-weight: bold;
-    color: #fff; /* ensures text stays readable */
-  }  
-  
+  background-color: #2d3748; /* or one of the other colors above */
+  font-weight: bold;
+  color: #fff; /* ensures text stays readable */
+}  
+
 button,
 #googleSignInBtn {
-    background-color: #4caf50;
-    color: white;
-    padding: 0.6rem 1rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin: 0.5rem 0;
-  }
-  
+  background-color: #4caf50;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
 button:hover,
 #googleSignInBtn:hover {
-    background-color: #45a049;
-  }
-  
+  background-color: #45a049;
+}
+
 #live-matches, #finished-matches {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 1rem;
-    align-items: stretch; /* Ensures cards match height */
-    padding-bottom: 1rem;
-  }  
-  
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 1rem;
+  align-items: stretch; /* Ensures cards match height */
+  padding-bottom: 1rem;
+}  
+
 @media (prefers-color-scheme: dark) {
-    body {
-      background-color: #1e1e1e;
-      color: #ddd;
-    }
-  
-    .match-card {
-      background: #2a2a2a;
-      box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
-    }
-  
-    #leaderboard th {
-      background: #333;
-    }
-  
-    button,
-    #googleSignInBtn {
-      background-color: #3b82f6;
-    }
-  
-    button:hover,
-    #googleSignInBtn:hover {
-      background-color: #2563eb;
-    }
+  body {
+    background-color: #1e1e1e;
+    color: #ddd;
   }
-  
+
+  .match-card {
+    background: #2a2a2a;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+  }
+
+  #leaderboard th {
+    background: #333;
+  }
+
+  button,
+  #googleSignInBtn {
+    background-color: #3b82f6;
+  }
+
+  button:hover,
+  #googleSignInBtn:hover {
+    background-color: #2563eb;
+  }
+}
+
 /* Responsive adjustments for small screens */
 @media (max-width: 600px) {
-    #container {
-      padding: 0.5rem;
-    }
-  
-    iframe#userGame {
-      max-width: 100%;
-    }
-  
-    table {
-      font-size: 0.9rem;
-    }
-  }  
-  
+  #container {
+    padding: 0.5rem;
+  }
+
+  iframe#userGame {
+    max-width: 100%;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+}  
+
 /* Link styles */
 a:link {
-    color: lightskyblue;
-  }
-  
+  color: lightskyblue;
+}
+
 a:visited {
-    color: #6d4b8d;
-  }
-  
+  color: #6d4b8d;
+}
+
 a:hover {
-    color: #ffffff;
-  }
-  
+  color: #ffffff;
+}
+
 a:active {
-    color: #ff4040;
-    text-decoration: none;
-    font-weight: normal;
-  }  
+  color: #ff4040;
+  text-decoration: none;
+  font-weight: normal;
+}  
 
 .scroll-container {
-    overflow-x: auto;
-    padding-bottom: 1rem;
-  }
-  
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
 .matches-row {
-    display: flex;
-    gap: 1rem;
-    min-width: max-content;
-  }
+  display: flex;
+  gap: 1rem;
+  min-width: max-content;
+}
 
 .scroll-container::-webkit-scrollbar {
-    height: 8px;
-  }
-  
+  height: 8px;
+}
+
 .scroll-container::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 4px;
-  }
-  
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
 #games-loading-bar-container {
-    height: 6px;
-    width: 100%;
-    background-color: #ddd;
-    margin: 1rem 0;
-    position: relative;
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  
+  height: 6px;
+  width: 100%;
+  background-color: #ddd;
+  margin: 1rem 0;
+  position: relative;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
 #games-loading-bar {
-    height: 100%;
-    width: 0%;
-    background-color: #4CAF50;
-    transition: width 0.2s ease;
-  }  
+  height: 100%;
+  width: 0%;
+  background-color: #4CAF50;
+  transition: width 0.2s ease;
+}  

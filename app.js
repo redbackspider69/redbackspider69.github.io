@@ -102,7 +102,7 @@ async function afterSignIn(user) {
       document.getElementById("game-panel").style.display = "block";
       const url = new URL(userData.currentGameUrl)
       const gameId = url.pathname.slice(1);
-      document.getElementById("userGame").src = `https://lichess.org/embed/${gameId}#9999?theme=auto&bg=auto`;
+      document.getElementById("userGame").src = `https://lichess.org/embed/${gameId}#9999?theme=dark&bg=auto`;
 
       if (!checkIfFirstMove(gameId)) {
       document.getElementById("reportButton").style.display = "block";
@@ -247,7 +247,7 @@ async function loadMatches() {
     card.appendChild(title);
 
     const iframe = document.createElement('iframe');
-    iframe.src = `https://lichess.org/embed/${lichessGameId}#9999?theme=auto&bg=auto`;
+    iframe.src = `https://lichess.org/embed/${lichessGameId}#9999?theme=dark&bg=auto`;
     iframe.width = '240';
     iframe.height = '240';
     iframe.style.borderRadius = '4px';

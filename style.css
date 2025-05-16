@@ -79,11 +79,11 @@ body {
   } 
   
 iframe {
+    border-radius: 8px;
     width: 100%;
-    aspect-ratio: 1 / 1; /* Wider to include move list */
-    max-height: 100%;
-    border: none;
-  }  
+    height: 240px;
+    aspect-ratio: 1 / 1;
+  }
 
 #iframe-wrapper {
     display: flex;
@@ -110,7 +110,20 @@ iframe {
     top: 0;
     left: 0;
   }  
-  
+
+#draggable-wrapper {
+    background-color: #2e2e2e;
+    max-width: 360px;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+    position: absolute; /* needed for dragging */
+    top: 100px;
+    left: 100px;
+    cursor: grab;
+    z-index: 1000;
+  }  
+
 .iframe-loader {
     position: absolute;
     top: 50%;

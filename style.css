@@ -92,11 +92,19 @@ iframe {
   }
   
 .iframe-wrapper {
-    width: 100%;
-    max-width: 370px;
-    aspect-ratio: 1 / 1;
-    margin: 0 auto;
-    position: relative;
+    resize: both;
+    overflow: auto;
+    width: 360px;
+    height: 370px; /* 360 board + ~10px for moves list if needed */
+    max-width: 100%;
+    max-height: 90vh;
+    min-width: 300px;
+    min-height: 300px;
+    margin: 1rem auto;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background-color: #2e2e2e; /* Matches Lichess dark theme */
+    display: block;
   }
   
 #userGame {
@@ -105,25 +113,8 @@ iframe {
     border: none;
     border-radius: 8px;
     display: block;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    top: 0;
-    left: 0;
   }  
-
-#draggable-wrapper {
-    background-color: #2e2e2e;
-    max-width: 360px;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.3);
-    position: absolute; /* needed for dragging */
-    top: 100px;
-    left: 100px;
-    cursor: grab;
-    z-index: 1000;
-  }  
-
+  
 .iframe-loader {
     position: absolute;
     top: 50%;

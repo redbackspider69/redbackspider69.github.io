@@ -359,26 +359,6 @@ document.getElementById('minimise-btn').addEventListener('click', () => {
   renderLeaderboard();
 });
 
-const dragEl = document.getElementById("draggable-wrapper");
-let isDragging = false, offsetX = 0, offsetY = 0;
-
-dragEl.addEventListener("mousedown", (e) => {
-  isDragging = true;
-  offsetX = e.clientX - dragEl.offsetLeft;
-  offsetY = e.clientY - dragEl.offsetTop;
-  dragEl.style.cursor = "grabbing";
-});
-
-document.addEventListener("mousemove", (e) => {
-  if (!isDragging) return;
-  dragEl.style.left = `${e.clientX - offsetX}px`;
-  dragEl.style.top = `${e.clientY - offsetY}px`;
-});
-
-document.addEventListener("mouseup", () => {
-  isDragging = false;
-  dragEl.style.cursor = "grab";
-});
 
 /*
 // Reload matches every 30 seconds

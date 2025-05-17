@@ -318,7 +318,7 @@ a:active {
   padding: 1rem 2rem;
   border-radius: 8px;
   width: 90%;
-  max-width: 420px;
+  max-width: 450px;
   position: relative;
 }
 
@@ -331,6 +331,7 @@ a:active {
 }
 
 #popupImage {
-  width: 105%;
+  width: 115%;
   height: auto;
+  margin: auto;
 }

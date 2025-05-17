@@ -303,8 +303,8 @@ a:active {
 }  
 
 #info-btn {
-  width: 20px;              /* Adjust size */
-  height: 20px;
+  width: 30px;              /* Adjust size */
+  height: 30px;
   margin-left: 8px;         /* Space from the button */
   vertical-align: middle;   /* Align with text or buttons */
   cursor: pointer;          /* Pointer cursor on hover */ 
@@ -335,6 +335,11 @@ a:active {
   position: relative;
 }
 
+
+.popup-content > img {
+  border: 1px solid red;
+}
+
 #popup-close {
   position: absolute;
   top: 0.5rem;
@@ -343,7 +348,8 @@ a:active {
   cursor: pointer;
 }
 
-#popupImage {
+
+.popupImage {
   width: 115%;
   height: auto;
   margin: auto;

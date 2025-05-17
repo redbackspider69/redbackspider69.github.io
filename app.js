@@ -366,6 +366,19 @@ document.getElementById('minimise-btn').addEventListener('click', () => {
   renderLeaderboard();
 });
 
+document.getElementById("info-btn").addEventListener("click", () => {
+  document.getElementById("info-popup").style.display = "block";
+});
+
+document.getElementById("popup-close").addEventListener("click", () => {
+  document.getElementById("info-popup").style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target.id === "info-popup") {
+    document.getElementById("info-popup").style.display = "none";
+  }
+});
 
 /*
 // Reload matches every 30 seconds

@@ -313,9 +313,10 @@ function renderLeaderboard() {
   tbody.innerHTML = "";
 
   let placing = 1;
-  let lastScore = null;
   let shown = 0;
   let userIsShown = false;
+  let lastScore = null;
+  let actualPlacing = 1;
 
   for (let i = 0; i < leaderboardData.length; i++) {
     const user = leaderboardData[i];
@@ -323,21 +324,27 @@ function renderLeaderboard() {
     const withinVisible = shown < currentVisibleCount;
 
     if (withinVisible || (isCurrentUser && !userIsShown)) {
+      // Only increment placing if score is lower
       if (lastScore !== null && user.score < lastScore) {
-        placing = shown + 1; // so 1st = index 0 + 1, etc.
+        placing = actualPlacing;
       }
 
       const row = document.createElement("tr");
       row.innerHTML = `<td>${placing}</td><td>${user.name}</td><td>${user.score}</td>`;
-      if (isCurrentUser) row.style.fontWeight = 'bold';
+      if (isCurrentUser) {
+        row.style.fontWeight = 'bold';
+        row.classList.add("highlighted-user");
+        userIsShown = true;
+      }
 
       tbody.appendChild(row);
 
       if (!isCurrentUser) shown++;
-      else { userIsShown = true; row.classList.add("highlighted-user"); }
 
       lastScore = user.score;
     }
+
+    actualPlacing++;
   }
 
   document.getElementById('show-more-btn').style.display =

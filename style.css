@@ -302,6 +302,19 @@ a:active {
   transition: width 0.2s ease;
 }  
 
+#info-btn {
+  width: 20px;              /* Adjust size */
+  height: 20px;
+  margin-left: 8px;         /* Space from the button */
+  vertical-align: middle;   /* Align with text or buttons */
+  cursor: pointer;          /* Pointer cursor on hover */ 
+  transition: transform 0.1s ease;
+}
+
+#info-btn:hover {
+  transform: scale(1.2);    /* Slight zoom on hover */
+  filter: brightness(1.2);  /* Lighten on hover */
+}
 .popup-box {
   display: none; /* hidden by default */
   position: fixed;

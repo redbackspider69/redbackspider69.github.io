@@ -335,11 +335,6 @@ a:active {
   position: relative;
 }
 
-
-.popup-content > img {
-  border: 1px solid red;
-}
-
 #popup-close {
   position: absolute;
   top: 0.5rem;
@@ -350,7 +345,7 @@ a:active {
 
 
 .popupImage {
-  width: 115%;
+  width: 100%;
   height: auto;
   margin: auto;
 }

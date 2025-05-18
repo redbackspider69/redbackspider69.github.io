@@ -328,21 +328,25 @@ a:active {
   background-color: #1e1e1e;
   color: white;
   margin: 10% auto;
-  padding: 1rem 2rem;
+  padding: 1rem 1.2rem;       /* Slightly smaller padding on small screens */
   border-radius: 8px;
   width: 90%;
   max-width: 450px;
   position: relative;
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: 90vh;           /* Prevent it from going off screen */
 }
 
 #popup-close {
   position: absolute;
   top: 0.5rem;
   right: 0.8rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   cursor: pointer;
+  padding: 0.25rem 0.5rem;     /* Tappable area */
+  line-height: 1;
 }
-
 
 .popupImage {
   width: 100%;

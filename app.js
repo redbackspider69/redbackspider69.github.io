@@ -24,51 +24,51 @@ function isNumeric(str) {
 } // from https://stackoverflow.com/a/175787
 
 signInBtn.addEventListener("click", () => {
-const provider = new firebase.auth.GoogleAuthProvider();
-auth.signInWithPopup(provider)
-  .then((result) => {
-    const testing = true;
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then((result) => {
+      const testing = true;
 
-    const user = result.user;
-    const email = user.email;
+      const user = result.user;
+      const email = user.email;
 
-    console.log(email);
-    if (testing === false) {
-      if (!email.endsWith("@student.sbhs.nsw.edu.au") || !isNumeric(email[0])) {
-        alert("Please use your @student.sbhs.nsw.edu.au account to prevent double accounts.");
-        auth.signOut();
-        return;
+      console.log(email);
+      if (testing === false) {
+        if (!email.endsWith("@student.sbhs.nsw.edu.au") || !isNumeric(email[0])) {
+          alert("Please use your [studentID]@student.sbhs.nsw.edu.au account to help prevent double accounts.");
+          auth.signOut();
+          return;
+        }
       }
-    }
 
-    // Only create the user record if it doesn't exist
-    const uid = user.uid;
-    const userRef = db.ref("users/" + uid);
-    
-    userRef.once("value").then((snapshot) => {
-      if (!snapshot.exists()) {
-        userRef.set({
-          name: user.displayName,
-          email: user.email,
-          score: 0,
-          opponent: null,
-          currentGameUrl: null
-        }).then(() => {
-          loadLeaderboard(); // Only call it after user is added
-        });
-      } else {
-        loadLeaderboard(); // Call immediately if already exists
-      }
+      // Only create the user record if it doesn't exist
+      const uid = user.uid;
+      const userRef = db.ref("users/" + uid);
+      
+      userRef.once("value").then((snapshot) => {
+        if (!snapshot.exists()) {
+          userRef.set({
+            name: user.displayName,
+            email: user.email,
+            score: 0,
+            opponent: null,
+            currentGameUrl: null
+          }).then(() => {
+            loadLeaderboard(); // Only call it after user is added
+          });
+        } else {
+          loadLeaderboard(); // Call immediately if already exists
+        }
+      });
+
+      userInfo.innerText = `Signed in as ${user.displayName}`;
+      signInBtn.style.display = "none";
+      afterSignIn(user)
+    })
+    .catch((error) => {
+      console.error("Sign-in error:", error);
+      alert("Sign-in failed.");
     });
-
-    userInfo.innerText = `Signed in as ${user.displayName}`;
-    signInBtn.style.display = "none";
-    afterSignIn(user)
-  })
-  .catch((error) => {
-    console.error("Sign-in error:", error);
-    alert("Sign-in failed.");
-  });
 });
 
 auth.onAuthStateChanged((user) => {

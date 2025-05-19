@@ -39,7 +39,7 @@ signInBtn.addEventListener("click", () => {
           auth.signOut();
           return;
         }
-      }
+      } 
 
       // Only create the user record if it doesn't exist
       const uid = user.uid;

@@ -310,7 +310,7 @@ a:active {
   cursor: pointer;          /* Pointer cursor on hover */ 
   transition: transform 0.1s ease;
 }
- 
+
 #info-btn:hover {
   transform: scale(1.2);    /* Slight zoom on hover */
   filter: brightness(1.2);  /* Lighten on hover */

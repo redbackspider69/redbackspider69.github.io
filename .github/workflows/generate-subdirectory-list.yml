@@ -11,6 +11,9 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+          ref: main  # Make sure to track the actual branch
 
       - name: Generate subdirectories.json
         run: |
@@ -29,4 +32,4 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add subdirectories.json
           git commit -m "Update subdirectories list" || echo "No changes"
-          git push
+          git push origin main  # Explicitly push to the main branch

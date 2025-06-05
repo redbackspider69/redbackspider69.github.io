@@ -1,4 +1,4 @@
-fetch('directories.json')
+fetch('subdirectories.json')
   .then(response => response.json())
   .then(directories => {
     const list = document.getElementById("subdirectoryList");

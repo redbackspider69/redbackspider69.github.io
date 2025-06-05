@@ -1,0 +1,32 @@
+name: Generate Subdirectory List
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Generate directories.json
+        run: |
+          echo "[" > directories.json
+          for dir in */ ; do
+            if [[ "$dir" != "assets/" && "$dir" != ".github/" ]]; then
+              echo "  \"${dir%/}\"," >> directories.json
+            fi
+          done
+          sed -i '$ s/,$//' directories.json
+          echo "]" >> directories.json
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add directories.json
+          git commit -m "Update directories list" || echo "No changes"
+          git push

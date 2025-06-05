@@ -27,9 +27,12 @@ jobs:
           echo "]" >> subdirectories.json
 
       - name: Commit and push
+        env:
+          TOKEN: ${{ secrets.SUBDIRECTORYFETCHINGTOKEN }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "Auto Commit Bot"
+          git config user.email "bot@github.com"
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}
           git add subdirectories.json
           git commit -m "Update subdirectories list" || echo "No changes"
-          git push origin main  # Explicitly push to the main branch
+          git push origin main

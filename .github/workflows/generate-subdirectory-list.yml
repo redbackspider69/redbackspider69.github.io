@@ -12,8 +12,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          persist-credentials: true
-          ref: main  # Make sure to track the actual branch
+          persist-credentials: false
 
       - name: Generate subdirectories.json
         run: |
@@ -26,13 +25,13 @@ jobs:
           sed -i '$ s/,$//' subdirectories.json
           echo "]" >> subdirectories.json
 
-      - name: Commit and push
+      - name: Commit and push changes
         env:
           TOKEN: ${{ secrets.SUBDIRECTORYFETCHINGTOKEN }}
         run: |
-          git config user.name "Auto Commit Bot"
-          git config user.email "bot@github.com"
+          git config --global user.name "Auto Commit Bot"
+          git config --global user.email "bot@github.com"
           git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}
           git add subdirectories.json
           git commit -m "Update subdirectories list" || echo "No changes"
-          git push origin main
+          git push origin main || (echo "==== GIT PUSH FAILED ====" && git remote -v && git status && exit 1)

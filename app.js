@@ -13,4 +13,4 @@ fetch('subdirectories.json')
   })
   .catch(err => {
     console.error("Failed to load directories.json", err);
-  });
+  }); 

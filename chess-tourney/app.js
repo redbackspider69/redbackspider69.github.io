@@ -391,3 +391,5 @@ setInterval(() => {
   loadLeaderboard();
 }, 30000);
 */
+
+alert("nobody asked you to be here, i'm not finished as i was abandoned in march of 2025, but i might be finished eventually, we'll see... if you're curious, my original intent was to host a chess tournament for all of year 8 including noobs, but my owner decided they are too lazy to participate in such an activity and it'd be too bothersome to try to convince them to...");
